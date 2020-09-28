@@ -1,12 +1,16 @@
 package dao;
 
 
+import models.Department;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-class Sql2oDepartmentDaoTest {
+import static org.junit.Assert.assertNotEquals;
+
+public class Sql2oDepartmentDaoTest {
 
     private Sql2oDepartmentDao departmentDao;
     private Connection conn;
@@ -22,6 +26,19 @@ class Sql2oDepartmentDaoTest {
     @After
     public void tearDown() throws Exception {
         conn.close();
+    }
+
+    @Test
+    public void addingDepartmentSetsId() throws Exception{
+        Department testDepartment=setUpDepartment();
+        int originalDepartmentId=testDepartment.getDepartmentId();
+        departmentDao.add(testDepartment);
+        assertNotEquals(originalDepartmentId,testDepartment.getDepartmentId());
+    }
+
+    //helper
+    public Department setUpDepartment(){
+        return new Department("human resource","recruit company workforce");
     }
 
 }
