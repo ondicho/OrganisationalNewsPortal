@@ -1,19 +1,20 @@
 package models;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 import java.util.Objects;
 
 public abstract class News {
-    private int articleId;
-    private String articleTitle;
-    private String articleContent;
-    private String articleAuthor;
+    public int articleId;
+    public String articleTitle;
+    public String articleContent;
+    public String articleAuthor;
+    public String articleScope;
 
-    public News(String articleTitle, String articleContent, String articleAuthor){
-        this.articleTitle = articleTitle;
-        this.articleContent = articleContent;
-        this.articleAuthor = articleAuthor;
+    public int getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public String getArticleTitle() {
@@ -40,27 +41,11 @@ public abstract class News {
         this.articleAuthor = articleAuthor;
     }
 
-    public int getArticleId() {
-        return articleId;
+    public String getArticleScope() {
+        return articleScope;
     }
 
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        News news = (News) o;
-        return articleId == news.articleId &&
-                Objects.equals(articleTitle, news.articleTitle) &&
-                Objects.equals(articleContent, news.articleContent) &&
-                Objects.equals(articleAuthor, news.articleAuthor);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(articleId, articleTitle, articleContent, articleAuthor);
+    public void setArticleScope(String articleScope) {
+        this.articleScope = articleScope;
     }
 }
