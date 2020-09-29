@@ -2,7 +2,9 @@ package dao;
 
 
 import models.Department;
+import models.DB;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
@@ -13,19 +15,26 @@ import static org.junit.Assert.assertNotEquals;
 public class Sql2oDepartmentDaoTest {
 
     private Sql2oDepartmentDao departmentDao;
-    private Connection conn;
+    private static Connection conn;
 
     @Before
     public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_news_portal_test";
+        Sql2o sql2o = new Sql2o(connectionString, "ondicho", "1234");
         departmentDao = new Sql2oDepartmentDao(sql2o);
         conn = sql2o.open();
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @After //run after every test
+    public void tearDown() throws Exception {  //I have changed
+        System.out.println("clearing database");
+        departmentDao.clearAll(); //clear all restaurants after every test
+    }
+
+    @AfterClass
+    public static void shutDown() throws Exception {
         conn.close();
+        System.out.println("clearing database");
     }
 
     @Test
