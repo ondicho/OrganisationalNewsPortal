@@ -9,6 +9,8 @@ public interface DepartmentDao {
     //create
     void add(Department department);
 
+    Department findById(int id);
+
     //read
     List<Department> getAll();
 
