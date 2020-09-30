@@ -39,7 +39,7 @@ public class Sql2oUserDao implements UserDao{
     @Override
     public List<User> getAll() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM user")
+            return con.createQuery("SELECT * FROM users")
                     .executeAndFetch(User.class);
         }
     }
