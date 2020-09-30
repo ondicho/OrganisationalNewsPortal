@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class Department {
-    private int departmentId;
+    private int id;
     private String departmentName;
     private String departmentDescription;
 
@@ -12,12 +12,12 @@ public class Department {
         this.departmentDescription=departmentDescription;
     }
 
-    public int getDepartmentId() {
-        return departmentId;
+    public int getId() {
+        return id;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDepartmentName() {
@@ -41,13 +41,13 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return departmentId == that.departmentId &&
+        return id == that.id &&
                 Objects.equals(departmentName, that.departmentName) &&
                 Objects.equals(departmentDescription, that.departmentDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departmentId, departmentName, departmentDescription);
+        return Objects.hash(id, departmentName, departmentDescription);
     }
 }

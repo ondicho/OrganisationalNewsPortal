@@ -7,6 +7,16 @@ import static org.junit.Assert.*;
 
 public class DepartmentTest {
 
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+
+
+
     @Test
     public void getDepartmentName() {
         Department testDepartment= setUpDepartment();
@@ -36,8 +46,8 @@ public class DepartmentTest {
     @Test
     public void setDepartmentId() {
         Department testDepartment= setUpDepartment();
-        testDepartment.setDepartmentId(3);
-        assertNotEquals(4, testDepartment.getDepartmentId());
+        testDepartment.setId(3);
+        assertEquals(3, testDepartment.getId());
     }
 
 

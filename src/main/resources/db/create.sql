@@ -4,14 +4,14 @@ CREATE DATABASE organisational_news_portal;
 \c organisational_news_portal;
 
 CREATE TABLE IF NOT EXISTS departments (
-  departmentId  SERIAL PRIMARY KEY,
+  id  SERIAL PRIMARY KEY,
   departmentName VARCHAR,
   departmentDescription VARCHAR
 );
 
 
 CREATE TABLE IF NOT EXISTS users (
-  UserId  SERIAL PRIMARY KEY,
+  id  SERIAL PRIMARY KEY,
   userName VARCHAR,
   userPosition VARCHAR,
   userRole VARCHAR,

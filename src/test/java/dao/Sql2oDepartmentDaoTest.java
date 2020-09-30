@@ -2,15 +2,14 @@ package dao;
 
 
 import models.Department;
-import models.DB;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertNotEquals;
+
 
 public class Sql2oDepartmentDaoTest {
 
@@ -25,29 +24,42 @@ public class Sql2oDepartmentDaoTest {
         conn = sql2o.open();
     }
 
-    @After //run after every test
-    public void tearDown() throws Exception {  //I have changed
-        System.out.println("clearing database");
-        departmentDao.clearAll(); //clear all restaurants after every test
-    }
-
-    @AfterClass
-    public static void shutDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         conn.close();
-        System.out.println("clearing database");
     }
 
     @Test
     public void addingDepartmentSetsId() throws Exception{
         Department testDepartment=setUpDepartment();
-        int originalDepartmentId=testDepartment.getDepartmentId();
-        departmentDao.add(testDepartment);
-        assertNotEquals(originalDepartmentId,testDepartment.getDepartmentId());
+        assertEquals(1,testDepartment.getId());
+    }
+
+    @Test
+    public void getAll() throws Exception{
+        Department testDepartment=setUpDepartment();
+        assertEquals(1,departmentDao.getAll().size());
+    }
+
+    @Test
+    public void deleteById() throws Exception {
+        Department testDepartment=setUpDepartment();
+        departmentDao.deleteById(testDepartment.getId());
+        assertEquals(0, departmentDao.getAll().size());
+    }
+
+    @Test
+    public void clearAll() throws Exception {
+        Department testDepartment=setUpDepartment();
+        departmentDao.clearAll();
+        assertEquals(0, departmentDao.getAll().size());
     }
 
     //helper
     public Department setUpDepartment(){
-        return new Department("human resource","recruit company workforce");
+        Department department= new Department("human resource","recruit company workforce");
+        departmentDao.add(department);
+        return department;
     }
 
 }
