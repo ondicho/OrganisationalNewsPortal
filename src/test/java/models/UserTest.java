@@ -61,8 +61,8 @@ public class UserTest {
     @Test
     public void setUserId() {
         User testUser= setUpUser();
-        testUser.setUserId(3);
-        assertNotEquals(5, testUser.getUserId());
+        testUser.setId(3);
+        assertNotEquals(5, testUser.getId());
     }
 
     //helper

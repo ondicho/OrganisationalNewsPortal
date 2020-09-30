@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class User {
-    private int userId;
+    private int id;
     private String userName;
     private String userPosition;
     private String userRole;
@@ -16,12 +16,12 @@ public class User {
         this.userDepartment=userDepartment;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -61,7 +61,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId &&
+        return id == user.id &&
                 Objects.equals(userName, user.userName) &&
                 Objects.equals(userPosition, user.userPosition) &&
                 Objects.equals(userRole, user.userRole) &&
@@ -70,6 +70,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, userPosition, userRole, userDepartment);
+        return Objects.hash(id, userName, userPosition, userRole, userDepartment);
     }
 }
