@@ -1,6 +1,9 @@
 import dao.Sql2oDepartmentDao;
+import dao.Sql2oDepartmentNewsDao;
+import dao.Sql2oGeneralNewsDao;
 import dao.Sql2oUserDao;
 import models.Department;
+import models.News;
 import models.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -15,6 +18,8 @@ public class App {
     public static void main(String[] args) {
         Sql2oDepartmentDao departmentDao;
         Sql2oUserDao userDao;
+        Sql2oGeneralNewsDao generalNewsDao;
+        Sql2oDepartmentNewsDao departmentNewsDao;
         Gson gson = new Gson();
         Connection conn;
 
@@ -23,6 +28,8 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, "ondicho", "1234");
         departmentDao=new Sql2oDepartmentDao(sql2o);
         userDao=new Sql2oUserDao(sql2o);
+        generalNewsDao=new Sql2oGeneralNewsDao(sql2o);
+        departmentNewsDao=new Sql2oDepartmentNewsDao(sql2o);
         conn = sql2o.open();
 //
     //departments
@@ -62,5 +69,26 @@ public class App {
             res.type("application/json");
             return gson.toJson(userDao.findById(id));
         });
+
+        //General news
+        post("/news/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            News news= gson.fromJson(req.body(), News.class);//make java from JSON with GSON
+            generalNewsDao.add(news);//Do our thing with our DAO
+            res.status(201);//A-OK! But why 201??
+            return gson.toJson(news);//send it back to be displayed
+        });
+
+        get("/news", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            return gson.toJson(generalNewsDao.NewsDao());//send it back to be displayed
+        });
+
+        get("/news/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            res.type("application/json");
+            int id= Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(generalNewsDao.findById(id));
+        });
+
+        //department news
     }
 }
