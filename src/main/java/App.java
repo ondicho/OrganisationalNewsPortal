@@ -2,12 +2,9 @@ import dao.Sql2oDepartmentDao;
 import dao.Sql2oDepartmentNewsDao;
 import dao.Sql2oGeneralNewsDao;
 import dao.Sql2oUserDao;
-import models.Department;
-import models.News;
-import models.User;
+import models.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-import models.DB;
 import com.google.gson.Gson;
 
 
@@ -71,18 +68,18 @@ public class App {
         });
 
         //General news
-        post("/news/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
-            News news= gson.fromJson(req.body(), News.class);//make java from JSON with GSON
-            generalNewsDao.add(news);//Do our thing with our DAO
+        post("/generalnews/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            GeneralNews generalNews= gson.fromJson(req.body(), GeneralNews.class);//make java from JSON with GSON
+            generalNewsDao.add(generalNews);//Do our thing with our DAO
             res.status(201);//A-OK! But why 201??
-            return gson.toJson(news);//send it back to be displayed
+            return gson.toJson(generalNews);//send it back to be displayed
         });
 
-        get("/news", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/generalnews", "application/json", (req, res) -> { //accept a request in format JSON from an app
             return gson.toJson(generalNewsDao.NewsDao());//send it back to be displayed
         });
 
-        get("/news/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/generalnews/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             res.type("application/json");
             int id= Integer.parseInt(req.params("id"));
             res.type("application/json");
@@ -91,18 +88,18 @@ public class App {
 
         //department news
         //General news
-//        post("/news/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
-//            News news= gson.fromJson(req.body(), News.class);//make java from JSON with GSON
-//            departmentNewsDao.add(news);//Do our thing with our DAO
-//            res.status(201);//A-OK! But why 201??
-//            return gson.toJson(news);//send it back to be displayed
-//        });
+        post("/departmentnews/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            DepartmentNews departmentNews= gson.fromJson(req.body(), DepartmentNews.class);//make java from JSON with GSON
+            departmentNewsDao.add(departmentNews);//Do our thing with our DAO
+            res.status(201);//A-OK! But why 201??
+            return gson.toJson(departmentNews);//send it back to be displayed
+        });
 
-        get("/news", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/departmentnews", "application/json", (req, res) -> { //accept a request in format JSON from an app
             return gson.toJson(departmentNewsDao.NewsDao());//send it back to be displayed
         });
 
-        get("/news/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/departmentnews/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             res.type("application/json");
             int id= Integer.parseInt(req.params("id"));
             res.type("application/json");
