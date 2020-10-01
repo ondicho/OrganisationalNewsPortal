@@ -90,5 +90,23 @@ public class App {
         });
 
         //department news
+        //General news
+        post("/news/new", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            News news= gson.fromJson(req.body(), News.class);//make java from JSON with GSON
+            departmentNewsDao.add(news);//Do our thing with our DAO
+            res.status(201);//A-OK! But why 201??
+            return gson.toJson(news);//send it back to be displayed
+        });
+
+        get("/news", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            return gson.toJson(departmentNewsDao.NewsDao());//send it back to be displayed
+        });
+
+        get("/news/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            res.type("application/json");
+            int id= Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(departmentNewsDao.findById(id));
+        });
     }
 }
