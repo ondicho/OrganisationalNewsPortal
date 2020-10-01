@@ -11,4 +11,9 @@ public class DepartmentNews extends News{
         this.articleScope=scope;
 
     }
+
+    public static String getScope() {
+        return scope;
+    }
+
 }

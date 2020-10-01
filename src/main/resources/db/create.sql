@@ -18,5 +18,15 @@ CREATE TABLE IF NOT EXISTS users (
   userDepartment VARCHAR
 );
 
+CREATE TABLE IF NOT EXISTS news (
+  id  SERIAL PRIMARY KEY,
+  articleTitle VARCHAR,
+  articleContent VARCHAR,
+  articleAuthor VARCHAR,
+  articleScope VARCHAR
+);
+
+
+
 CREATE DATABASE organisational_news_portal_test WITH TEMPLATE organisational_news_portal;
 
